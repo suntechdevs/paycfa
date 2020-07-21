@@ -1,0 +1,17 @@
+{
+    "name": "suntech/paycfa",
+    "description": "Systeme de paiement en ligne sur vos site ecommerce",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Suntech devs",
+            "email": "suntechdevs@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"suntech\\HelloWorld\\": "src/"}
+    },
+    "require": {}
+}

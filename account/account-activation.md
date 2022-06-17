@@ -8,7 +8,7 @@ Accédez aux paramètres de votre compte utilisateur pour avoir accès au menu d
 
 Cliquez sur **`INFORMATION`** pour accéder à la page des détails de votre compte business. Vous devez remplir les informations demandées pour valider la première partie de la validation de votre compte business.
 
-![Paramètre de compte utilisateur : Insertion des informations de vérification de votre entreprise.](<../.gitbook/assets/Capture d’écran (66).png>)
+![Paramètre de compte utilisateur : Insertion des informations de vérification de votre entreprise.](../.gitbook/assets/capture-decran-66-.png)
 
 Insérez les documents demandés pour valider votre compte business.&#x20;
 

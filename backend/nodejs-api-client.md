@@ -8,7 +8,7 @@ description: >-
 
 ## GENERATE YOUR API KEYS
 
-Les clés API sont vos références numériques vers les systèmes Intram. Nous les utilisons pour identifier votre compte et les applications que vous allez créer. Ces clés sont nécessaires à toute intégration  des API de paiement d'Intram. Voici les étapes à suivre:
+Les clés API sont vos références numériques vers les systèmes Intram. Nous les utilisons pour identifier votre compte et les applications que vous allez créer. Ces clés sont nécessaires à toute intégration des API de paiement d'Intram. Voici les étapes à suivre:
 
 * Vous devez d'abord avoir un compte Intram Business activé. [Créez-en](https://account.intram.org/register) un si ce n'est pas encore le cas.
 * [Connectez-vous ](https://account.intram.org/login)à votre compte et cliquez sur Développeurs au niveau du menu à gauche.
@@ -29,7 +29,6 @@ npm i @intram-sdk/nodejs
 
 {% code title="Setup" %}
 ```javascript
-
 var intram = require('intram');
 
 var setup = new intram.Setup({
@@ -60,7 +59,7 @@ Vous pouvez configurer vos informations de service / activité / entreprise comm
 
 Intram vous propose plusieurs designs pour le portail de paiement. Vous pouvez donc choisir un modèle spécifique et ajouter la référence à votre boutique.
 
-&#x20;Vous pouvez également définir une couleur pour le portail de paiement. Seule la couleur du code est nécessaire
+Vous pouvez également définir une couleur pour le portail de paiement. Seule la couleur du code est nécessaire
 
 ```javascript
 var store = new intram.Store({
@@ -90,7 +89,6 @@ L'utilisation de la deuxième option vous offre les deux possibilités ci-dessou
 Cette instruction doit être incluse dans la configuration de votre service / activité.
 
 ```javascript
-
 var store = new intram.Store({
     name: 'Store at Sandra',
     callbackURL: 'http://www.my-shop.com/fichier_de_reception_des_données_de_facturation'
@@ -111,86 +109,18 @@ invoice.callbackURL = 'http://www.my-shop.com/fichier_de_reception_des_données_
 La validation réussie de la transaction de paiement renvoie la structure ci-dessous contenant les informations client, l'URL de sa facture Intram au format PDF ainsi qu'un hachage pour vérifier que les données reçues proviennent de nos serveurs.
 {% endhint %}
 
-#### **EXPECTED JSON  ANSWER**
+#### **EXPECTED JSON ANSWER**
 
 ```javascript
- { 
-  error: false,
-  status: 'PENDING',
-  transaction:
-   { 
-     _status: 'PENDING',
-     _channels: [],
-     _type: 'DEBIT',
-     marchand:
-      { 
-        _env: 'sandbox',
-        _template: [],
-        _user_id: '5f64d189a220c61399b360bb',
-        _web_site: 'www.oualid_company.com',
-        _company: 'oualid company',
-        _acronyme: 'LIDOU',
-        _base_url_site_web: '',
-        _url_checkout: '',
-        _url_success: '',
-        _url_error: '',
-        _email: 'oualid@company.com',
-         },
-     _store: { name: 'LandryShop' },
-     _reference: 'ZMNfTG2b1O',
-     _amount: 1000,
-     _country_code: 'BJ',
-     _qrcode:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAAAklEQVR4AewaftIAAAL2SURBVO3BQY7cUAhF0Zsni6WyKJbKgE6GjL5k2VVKI8758/MPawyxRhFrFLFGEWsUsUYRaxSxRhFrFLFGEWsUsUYRa
-                xSxRhFrFLFGuXhIFnxTpXOHLOgqnTtkwTdVOk+INYpYo4g1ysXLKp03yYITWdBVOl2l08mCk0rnpNJ5kyx4k1ijiDWKWKNcfJgsuKPSuaPSeaLSeUIW3FHpfJJYo4g1ilijXAwjC04qnU4WdJXObybWKGKNItYoF7+cLLhDFkwm1ihijSLWKBcfVul
-                8UqVzIgtOKp0nKp3/iVijiDWKWKNcvEwWfJMs6Cqdk0qnkwVdpXMiC/5nYo0i1ihijfLn5x8GkwVdpTOZWKOINYpYo1w8JAu6SqeTBV2l08mCrtLpZEFX6ZzIgjtkQVfp3CELukrnRBZ0lc6bxBpFrFHEGuXiwyqdk0rnpNLpZMETsqCrdDpZ0FU6n
-                Sy4QxZ8k1ijiDWKWKNcfJgsuKPS6WTBE5VOJwtOKp0nZMEdsqCrdJ4QaxSxRhFrlIuHKp1OFnSVTicLukrnpNLpZEFX6TwhC04qnTsqnRNZ8ElijSLWKGKNcvFllU4nC94kC7pK56TS6WTBSaXTyYITWdBVOp8k1ihijSLWKBcvq3TuqHSekAV3VDq
-                TiTWKWKOINcrFQ7LgmyqdrtI5kQVdpdPJghNZ0FU6d1Q6nSw4qXSeEGsUsUYRa5SLl1U6b5IFd8iCOyqdScQaRaxRxBrl4sNkwR2Vzh2y4KTSOZEFXaXTyYI3VTqfJNYoYo0i1igXv1yl08mCE1nQVTpPVDp3yIKu0nmTWKOINYpYo1z8crKgq3Sek
-                AVdpdPJgk4WdJXOSaXTyYKu0nlCrFHEGkWsUS4+rNL5pErnCVnwRKVzhyzoKp03iTWKWKOINcrFy2TBN8mCrtLpZMFJpXMiC05kwROyoKt0nhBrFLFGEWuUPz//sMYQaxSxRhFrFLFGEWsUsUYRaxSxRhFrFLFGEWsUsUYRaxSxRhFrlL+fIPw23ey
-                uKAAAAABJRU5ErkJggg==',
- invoice :{
-        transaction: '5f6a223d768b1875356440cc',
-         items : [
-                  [
-                    'name': 'Chaussures Croco',
-                    'quantity': '3',
-                    'unit_price': '10000',
-                    'total_price': '30000',
-                    'description': 'Chaussures faites en peau de crocrodile authentique qui chasse la pauvreté',
-                   ],
-                   [
-                     'name': 'Chemise Glacée',
-                     'quantity': '1',
-                     'unit_price': '5000',
-                     'total_price': '5000',
-                     'description': '',
-                   ],
-           ],
-          taxes [
-                 [
-                  'name': 'TVA (18%)',
-                  'amount': '6300',
-                 ],
-                 [
-                  'name': 'Livraison',
-                  'amount': '1000',
-                 ],
-                ],
-      'amount' : '42300',
-      'currency': 'XOF',
-      'custom_data'[
-          'categorie' => 'Jeu concours',
-          'periode' => 'Noël 2015',
-          'numero_gagnant' => '5',
-          'prix' => 'Bon de réduction de 50%',
-          ]
-      'actions' [
-          'cancel_url' => 'http://my-shop.com/cancel_url',
-          'callback_url' => 'http://my-shop.com/callback_url',
-          'return_url' => 'http://my-shop.com/return_url',
-          ],
-        }
-      }
-    }
+ {
+  +"status": "PENDING"
+  +"amount": 1000
+  +"currency": "XOF"
+  +"account_number":"22996XXXXXX"
+  +"source":"MOOV"
+  +"fees":50
+  +"net_amount":1050
+}
     
 ```
 
@@ -239,7 +169,7 @@ var invoice = new intram.CheckoutInvoice(setup, store);
 
 ### 1 - AJOUTER DES INFORMATIONS DE PAIEMENT
 
-#### &#x20;     **1-1 -** AJOUT D'ARTICLES ET DESCRIPTION DE LA FACTURE:
+#### **1-1 -** AJOUT D'ARTICLES ET DESCRIPTION DE LA FACTURE:
 
 Il est important de savoir que les éléments de facturation sont principalement utilisés à des fins de présentation sur la page de paiement. Intram n'utilisera aucun des montants déclarés pour facturer le client. Pour ce faire, vous devez explicitement utiliser la méthode SetTotalAmount de l'API pour spécifier le montant exact à facturer au client.
 
@@ -256,11 +186,10 @@ Vous pouvez éventuellement définir une description générale de la facture qu
 {% endhint %}
 
 ```javascript
-
 invoice.description = "Optional Description";
 ```
 
-#### &#x20;    **1-2 -** CONFIGURATION DU MONTANT TOTAL DE LA FACTURE**:**
+#### **1-2 -** CONFIGURATION DU MONTANT TOTAL DE LA FACTURE\*\*:\*\*
 
 Intram attend de vous que vous spécifiiez le montant total de la facture du client. Ce sera le montant qui sera facturé à votre client. Nous considérons que vous avez déjà effectué tous les calculs sur votre serveur avant de définir ce montant.
 
@@ -272,7 +201,7 @@ Intram n'effectuera pas de calculs sur ses serveurs. Le montant total de la fact
 invoice.totalAmount = 42300;
 ```
 
-#### &#x20;**1-3 -** CONFIGURATION DE LA MONNAIE DE LA FACTURE:
+#### **1-3 -** CONFIGURATION DE LA MONNAIE DE LA FACTURE:
 
 Intram attend de vous que vous spécifiiez la devise de la facture du client. Ce sera la devise qui sera attachée à votre client facturé.
 
@@ -288,7 +217,7 @@ invoice.currency = 'XOF';
 
 ### 2 - REDIRECTION VERS LA PAGE DE PAIEMENT INTRAM
 
-Après avoir ajouté des articles à votre facture et configuré le montant total de la facture, vous pouvez rediriger votre client vers la page de paiement en appelant la méthode de création à partir de votre  objet `invoice`. Veuillez noter que la méthode `invoice.create()` renvoie un booléen (vrai ou faux) selon que la facture a été créée avec succès ou non. Cela vous permet de mettre une instruction `if - else` et de gérer le résultat comme bon vous semble.
+Après avoir ajouté des articles à votre facture et configuré le montant total de la facture, vous pouvez rediriger votre client vers la page de paiement en appelant la méthode de création à partir de votre objet `invoice`. Veuillez noter que la méthode `invoice.create()` renvoie un booléen (vrai ou faux) selon que la facture a été créée avec succès ou non. Cela vous permet de mettre une instruction `if - else` et de gérer le résultat comme bon vous semble.
 
 ```javascript
 // The following code describes how to create a payment invoice at our servers,
@@ -421,7 +350,6 @@ Cependant, cette option convient aux paiements PAR car elle vous permettrait par
 {% endhint %}
 
 ```javascript
-
 // Intram will automatically add the invoice token as a QUERYSTRING "token"
 // if you have configured a "return_url" or "cancel_url".
 var token = 'test_VPGPZNnHOC';

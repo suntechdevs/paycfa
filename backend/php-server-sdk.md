@@ -4,14 +4,14 @@ description: PHP SDK for server side integration
 
 # PHP SERVER SDK
 
-## GENERATE YOUR API KEYS
+## GENEREZ VOS CLES API
 
-API keys are your digital references towards Intram systems. We use them to identify your account and the applications you will create. These keys are necessary for any integration of the APIs of Intram's payments APIs. Here are the steps to follow:
+Les clés API sont vos références numériques vers les systèmes Intram. Nous les utilisons pour identifier votre compte et les applications que vous allez créer. Ces clés sont nécessaires pour toute intégration des API de paiements d'Intram. Voici les étapes à suivre :
 
-* First, you need to have an Intram Business account activated. [Create ](https://app.intram.org/register)one if it is not yet the case.
-* [Login](https://app.intram.org/login) to your account and click on Developers at the menu level on the left.
-* Then click on API, you will see all yours API keys.
-* You can switch to `SANDBOX MODE,` or`ENABLE LIVE MODE`.
+* Tout d'abord, vous devez avoir un compte Intram Business activé. Créez-en un si ce n'est pas encore le cas.
+* [Connectez-vous](https://app.intram.org/login) à votre compte et cliquez sur Développeurs au niveau du menu à gauche.
+* Cliquez ensuite sur API, vous verrez toutes vos clés API.
+* Vous pouvez passer au mode `SANDBOX` ou activer le mode `LIVE`.
 
 ### Installation via composer
 
@@ -19,9 +19,9 @@ API keys are your digital references towards Intram systems. We use them to iden
 composer require intram/php-sdk
 ```
 
-### API configuration
+### Api configuration
 
-[Login](https://app.intram.org/login) to your Intram account, click on Developer, then on API at this level, get the API keys and give them as arguments to the controller. Initialize Intram by entering in order: `PUBLIC_KEY`, ⁣`PRIVATE_KEY`, `INTRAM_SECRET`, ⁣`INTRAM_MARCHAND_KEY`, `MODE` The mode: `true` for live mode and `false` for test mode.
+[Login](https://app.intram.org/login) à votre compte Intram, cliquez sur `Developer`, puis sur `API` à ce niveau, récupérez les clés API et donnez-les comme arguments au contrôleur. Initialiser Intram en entrant dans l'ordre : `PUBLIC_KEY`, `PRIVATE_KEY`, `INTRAM_SECRET`, `INTRAM_MARCHAND_KEY`, `MODE` Le mode : `true` pour le mode live et `false` pour le mode test.
 
 ```php
 $intram = new \Intram\Intram(
@@ -32,47 +32,45 @@ $intram = new \Intram\Intram(
             true)
 ```
 
-### Configure your department / company information
+### Configurez les informations relatives à votre département / entreprise
 
-#### Setting Store name
-
-(required)
+#### Nom de votre entreprise (requis)
 
 ```php
 $intram->setNameStore("Suntech Store");
 ```
 
-#### Setting Store Logo Url
+#### URL du  Logo de votre entreprise (optionnel)
 
 ```php
 $intram->setLogoUrlStore("https://www.suntechshop/logo.png");
 ```
 
-#### Setting Store Web site
+#### Le site web de votre entreprise (optionnel)
 
 ```php
 $intram->setWebSiteUrlStore("https://www.suntechshop");
 ```
 
-#### Setting Store phone
+#### Le numéro de téléphone de votre entreprise
 
 ```php
 $intram->setPhoneStore("97000000");
 ```
 
-#### Setting Store Postal adress
+#### L'adresse postale de votr eentreprise
 
 ```php
 $intram->setPostalAdressStore("BP 35");
 ```
 
-### Create a request paiement
+### Créer une requête de paiement
 
-In order to allow the user to make a payment on your store, you must create the transaction and then send them the payment url or the qr code to scan. For that :
+Afin de permettre à l'utilisateur d'effectuer un paiement sur votre boutique, vous devez créer la transaction puis lui envoyer l'URL de paiement ou le QR code à scanner. Pour cela :
 
-#### Add Invoice Items
+Ajouter des éléments de facture
 
-Add the different products of the purchase (required)
+Ajouter les différents produits de l'achat&#x20;
 
 ```php
 $intram->setItems([
@@ -81,79 +79,67 @@ $intram->setItems([
         ]);
 ```
 
-#### Setting TVA Amount
-
-TVA (optional)
+#### La TVA&#x20;
 
 ```php
 $intram->setTva([["name" => "VAT (18%)", "amount" => 1000],["name" => " other VAT", "amount" => 500]]);
 ```
 
-#### Adding Custom Data
-
-(optional)
+#### Données personnelles
 
 ```php
 $intram->setCustomData([['CartID',"32393"],['PERIOD',"TABASKI"]]);
 ```
 
-#### Setting Total Amount
-
-Order total (required)
+#### Prix total de la transaction (requis)
 
 ```php
 $intram->setAmount(13600);
 ```
 
-#### Setting Currency
-
-Currency of paiement (required)
+#### Devise de la transaction (requis)
 
 ```php
 $intram->setCurrency("XOF");
 ```
 
-#### Setting Description
-
-Description of operation (required)
+#### Description de la transaction (optionnelle)
 
 ```php
 $intram->setDescription("Pretty and suitable for your waterfall");
 ```
 
-#### Setting Template
-
-(required)
+#### Modèle de page de paiement (requis)
 
 ```php
 $intram->setTemplate("default");
 ```
 
-#### Setting Store Redirection Url
+#### URL de Redirection
 
 ```php
 $intram->setRedirectionUrl("https://www.suntechshop/redirection-url");
 ```
 
-#### Setting Store Return Url
+#### URL Retour après transaction&#x20;
 
 ```php
 $intram->setReturnUrl("https://www.suntechshop/return-url");
 ```
 
-#### Setting Store Cancel Url
+#### URL retour après annulation de la transaction
 
 ```php
 $intram->setCancelUrl("https://www.suntechshop/cancel-url");
 ```
 
-#### Make the payment request
+#### Effectuer la demande de paiement
 
 ```php
 $response = $intram->setRequestPayment();
 ```
 
-#### Expected response
+Réponse attendue
 
 ```php
 {
@@ -166,7 +152,7 @@ $response = $intram->setRequestPayment();
 }
 ```
 
-#### Get data
+#### Récupérer des données
 
 ```php
 $transaction_id = $response->transaction_id;
@@ -176,15 +162,15 @@ $total_amount = $response->total_amount;
 .......
 ```
 
-### Get transaction status
+### Obtenir le statut de la transaction
 
-Give the transaction identifier as an argument to the function (required)
+Donnez l'identifiant de la transaction comme argument à la fonction
 
 ```php
 $intram->getTransactionStatus($transaction_id);
 ```
 
-#### Expected response
+#### Réponse attendue
 
 ```php
 {
@@ -198,10 +184,10 @@ $intram->getTransactionStatus($transaction_id);
 }
 ```
 
-## Running Tests
+## Tests
 
-To run tests, just set up the API configuration environment variables. An internet connection is required for some tests to pass.
+Pour exécuter les tests, il suffit de définir les variables d'environnement de la configuration de l'API. Une connexion Internet est nécessaire pour que certains tests soient réussis.
 
-### License
+### Licence
 
 MIT

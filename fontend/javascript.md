@@ -66,3 +66,11 @@ EXEMPLE AVEC AJAX
           }
 });
 ```
+
+{% hint style="success" %}
+Numero de test
+
+&#x20;**MTN** : 67222918
+
+&#x20;**MOOV** : 99914337
+{% endhint %}

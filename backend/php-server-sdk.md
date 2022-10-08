@@ -40,7 +40,7 @@ $intram = new \Intram\Intram(
 $intram->setNameStore("Suntech Store");
 ```
 
-#### URL du  Logo de votre entreprise (optionnel)
+#### URL du Logo de votre entreprise (optionnel)
 
 ```php
 $intram->setLogoUrlStore("https://www.suntechshop/logo.png");
@@ -70,7 +70,7 @@ Afin de permettre à l'utilisateur d'effectuer un paiement sur votre boutique, v
 
 Ajouter des éléments de facture
 
-Ajouter les différents produits de l'achat&#x20;
+Ajouter les différents produits de l'achat
 
 ```php
 $intram->setItems([
@@ -79,7 +79,7 @@ $intram->setItems([
         ]);
 ```
 
-#### La TVA&#x20;
+#### La TVA
 
 ```php
 $intram->setTva([["name" => "VAT (18%)", "amount" => 1000],["name" => " other VAT", "amount" => 500]]);
@@ -121,7 +121,7 @@ $intram->setTemplate("default");
 $intram->setRedirectionUrl("https://www.suntechshop/redirection-url");
 ```
 
-#### URL Retour après transaction&#x20;
+#### URL Retour après transaction
 
 ```php
 $intram->setReturnUrl("https://www.suntechshop/return-url");
@@ -183,6 +183,14 @@ $intram->getTransactionStatus($transaction_id);
   +"net_amount":1050
 }
 ```
+
+{% hint style="success" %}
+Numero de test
+
+&#x20;**MTN** : 67222918
+
+&#x20;**MOOV** : 99914337
+{% endhint %}
 
 ## Tests
 

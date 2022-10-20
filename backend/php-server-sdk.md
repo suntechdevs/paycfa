@@ -187,9 +187,9 @@ $intram->getTransactionStatus($transaction_id);
 {% hint style="success" %}
 Numero de test
 
-&#x20;**MTN** : 67222918
+&#x20;**MTN** : 61000000
 
-&#x20;**MOOV** : 99914337
+&#x20;**MOOV** : 94000000
 {% endhint %}
 
 ## Tests

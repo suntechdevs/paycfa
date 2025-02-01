@@ -14,6 +14,8 @@ description: >-
 * Un compte Intram avec vos clés d'API
 * pip installé sur votre système
 
+
+
 ### Installation
 
 1. Installez le package via pip :
@@ -247,3 +249,7 @@ Pour toute assistance :
 
 * Documentation Intram : [https://intram.org/docs](https://intram.org/docs)
 * Support email : contact@intram.org
+
+
+
+{% embed url="https://github.com/suntechdevs/django-intram" %}

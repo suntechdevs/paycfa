@@ -6,8 +6,8 @@ Après avoir suivi les étapes de la section [INTRODUCTION](./), vous pouvez ens
 
 * [x] [PHP](backend/php-server-sdk.md)
 * [x] [WORDPRESS (WOOCOMMERCE)](backend/woocommerce-plugin.md)
-* [x] JAVA
+* [x] [DJANGO](backend/django-intram.md)
 * [x] [NODEJS](backend/nodejs-api-client.md)
-* [x] PrestaShop
-* [x] ANDROID
-* [x] HTTP/JSON
+* [x] [FLUTTER](mobile/flutter.md)
+* [x] [HTTP/JSON](backend/http.md)
+

@@ -1,5 +1,5 @@
 ---
-description: PHP SDK for server side integration
+description: SDK PHP pour l'intégration côté serveur.
 ---
 
 # PHP SERVER SDK

@@ -1,7 +1,7 @@
 ---
 description: >-
-  The Node.JS library for INTRAM (intram.org). Built on the INTRAM HTTP API
-  (beta).
+  Bibliothèque Node.js pour INTRAM (intram.org), construite sur l'API HTTP
+  Intram (bêta).
 ---
 
 # NODEJS API CLIENT

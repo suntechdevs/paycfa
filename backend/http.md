@@ -1,36 +1,40 @@
 ---
 description: >-
-  L'API Intram permet d'intégrer facilement des solutions de paiement dans vos
-  applications. Cette documentation fournit les informations nécessaires pour
-  utiliser l'API via des requêtes HTTP directes.
+  Intégration HTTP directe avec l'ancienne API Intram (mode public). Pour les
+  nouvelles intégrations backend, voir la section MERCHANT API V1.
 ---
 
 # HTTP
 
+{% hint style="warning" %}
+**Nouvelle intégration ?** Cette page documente l'API historique conçue pour les pages de paiement publiques (widget, gateway).
+Pour piloter votre compte marchand depuis votre **backend** (lire le solde, faire des payouts, transférer, demander un paiement, rembourser, recevoir des webhooks signés), utilisez la **[Merchant API v1](../merchant-api/README.md)** — elle est asynchrone, signée HMAC, idempotente et mieux outillée.
+{% endhint %}
+
 ### Prérequis
 
-Pour utiliser l'API, vous aurez besoin de :
+Pour utiliser cette API, vous aurez besoin de :
 
-* Vos clés d'API (public\_key, private\_key, secret\_key)
-* Votre identifiant marchand (marchand\_id)
-* cURL installé sur votre machine pour les tests en ligne de commande
+* Vos clés d'API : **public\_key**, **private\_key**, **secret\_key** (Menu Développeurs → API du dashboard)
+* `curl` (ou un client HTTP équivalent) pour les tests en ligne de commande
 
 ### Authentification
 
-Toutes les requêtes doivent inclure les headers d'authentification suivants :
+Toutes les requêtes doivent inclure les trois headers d'authentification suivants :
 
 ```
 X-API-KEY: votre_public_key
 X-PRIVATE-KEY: votre_private_key
 X-SECRET-KEY: votre_secret_key
-X-MARCHAND-KEY: votre_marchand_id
 ```
+
+Les clés sont validées sur la table `keys` et liées à votre compte marchand. Aucun autre identifiant n'est nécessaire dans les headers (l'identifiant marchand est dérivé automatiquement à partir de la combinaison des 3 clés).
 
 ### Endpoints
 
-#### Base URLs
+#### Base URL
 
-* endpoint : `https://webservices.intram.org:4002/api/v1/`
+* `https://webservices.intram.org:4002/api/v1/`
 
 #### 1. Initier un paiement
 
@@ -44,15 +48,9 @@ curl -X POST \
   -H 'X-API-KEY: votre_public_key' \
   -H 'X-PRIVATE-KEY: votre_private_key' \
   -H 'X-SECRET-KEY: votre_secret_key' \
-  -H 'X-MARCHAND-KEY: votre_marchand_id' \
   -H 'Content-Type: application/json' \
   -d '{
     "invoice": {
-      "keys": {
-        "public": "votre_public_key",
-        "private": "votre_private_key",
-        "secret": "votre_secret_key"
-      },
       "currency": "XOF",
       "items": [],
       "taxes": [],
@@ -76,6 +74,10 @@ curl -X POST \
   }'
 ```
 
+{% hint style="info" %}
+Les clés d'API se passent **uniquement en headers**. Ne les mettez jamais dans le body — c'est du code mort qui sera ignoré et qui expose vos secrets dans les logs.
+{% endhint %}
+
 #### 2. Vérifier le statut d'une transaction
 
 * **URL** : `/transactions/confirm/{transaction_id}`
@@ -88,7 +90,6 @@ curl -X GET \
   -H 'X-API-KEY: votre_public_key' \
   -H 'X-PRIVATE-KEY: votre_private_key' \
   -H 'X-SECRET-KEY: votre_secret_key' \
-  -H 'X-MARCHAND-KEY: votre_marchand_id' \
   -H 'Content-Type: application/json'
 ```
 
@@ -101,15 +102,9 @@ curl -X POST https://webservices.intram.org:4002/api/v1/payments/request \
 -H "X-API-KEY: votre_public_key" \
 -H "X-PRIVATE-KEY: votre_private_key" \
 -H "X-SECRET-KEY: votre_secret_key" \
--H "X-MARCHAND-KEY: votre_marchand_id" \
 -H "Content-Type: application/json" \
 -d '{
   "invoice": {
-    "keys": {
-      "public": "votre_public_key",
-      "private": "votre_private_key",
-      "secret": "votre_secret_key"
-    },
     "currency": "XOF",
     "amount": 1000
   },
@@ -128,19 +123,33 @@ curl -X POST https://webservices.intram.org:4002/api/v1/payments/request \
 
 L'API retourne des codes HTTP standards :
 
-* 200 : Succès
-* 400 : Erreur dans la requête
-* 401 : Erreur d'authentification
-* 500 : Erreur serveur
+* `200` : Succès
+* `400` : Erreur dans la requête
+* `401` : Erreur d'authentification
+* `500` : Erreur serveur
 
-En cas d'erreur, un message JSON est retourné avec le statut de l'erreur.
+En cas d'erreur, un message JSON est retourné avec le détail de l'erreur :
+
+```json
+{
+  "error": true,
+  "status": "ERROR",
+  "message": "Invalid API keys"
+}
+```
 
 ### Notes importantes
 
 1. **Sécurité**
-   * Ne partagez jamais vos clés d'API
-   * Utilisez HTTPS pour toutes les requêtes
-   * Validez toujours les callbacks côté serveur
+   * Ne partagez jamais vos clés d'API — surtout pas dans le body d'une requête, pas dans un repo Git, pas dans le code front-end.
+   * Utilisez HTTPS pour toutes les requêtes.
+   * Validez toujours les callbacks côté serveur en re-vérifiant l'état de la transaction avec `/transactions/confirm/{id}`.
 2. **Environnement de test**
-   * Utilisez l'environnement sandbox pour vos tests
-   * Les transactions en sandbox ne sont pas réelles
+   * Utilisez des clés sandbox (Menu Développeurs → API → mode `SANDBOX`) pour vos tests.
+   * Les transactions sandbox ne touchent pas les wallets de production.
+
+### Voir aussi
+
+* **[Merchant API v1](../merchant-api/README.md)** — la nouvelle API backend recommandée pour les nouvelles intégrations
+* [Devises supportées](../payment/supported-devices.md)
+* [Frais](../payment/fees.md)

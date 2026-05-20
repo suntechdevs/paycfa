@@ -1,7 +1,7 @@
 ---
 description: >-
-  The JavaScript SDK is designed to generate the payment solution within your
-  web application without reloading the page.
+  Le SDK JavaScript est conçu pour intégrer la solution de paiement dans votre
+  application web sans recharger la page.
 ---
 
 # JAVASCRIPT
@@ -27,7 +27,6 @@ intramOpenWidget.init({
             callback_url:'https://my-shop.com/check-paiement-status/',
             company:{ 
                 name:'my-shop',
-                template:'default+',
                 color:'green',
                 logo_url:'https://my-site.com/logo.jpg'
             },
@@ -55,13 +54,12 @@ EXEMPLE AVEC AJAX
             callback_url:data.callback_url,
             currency:'xof', //choose the currency
             company:{ 
-                name:'data.company.name, //your company namr
-                template:'default+', // payment gate template
+                name:'data.company.name', //your company namr
                 color:data.company.color, // payment gate template color
                 logo_url:data.company.logo // your company logo
             },
         }).then((data)=>{
-            console.log(data,'****** responses')
+            //console.log(data,'****** responses')
         })
           }
 });
@@ -70,7 +68,7 @@ EXEMPLE AVEC AJAX
 {% hint style="success" %}
 Numero de test
 
-&#x20;**MTN** : 61000000
+&#x20;**MTN** : 0162000000
 
-&#x20;**MOOV** : 94000000
+&#x20;**MOOV** : 0194000000
 {% endhint %}

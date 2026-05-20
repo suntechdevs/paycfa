@@ -1,13 +1,34 @@
+---
+description: >-
+  Intram accélère la digitalisation des entreprises en Afrique avec des
+  solutions de vente, d'encaissement et de paiement multicanal.
+---
+
 # INTRAM
 
 Nous accélérons la digitalisation des entreprises en Afrique à travers des solutions digitales pour vendre, recevoir des paiements, émettre des paiements et assurer une meilleure gestion.
 
-Notre objectif est de vous offrir une solution digitale et multicanale qui facilite l’émission et la réception de paiements sur site internet ou application mobile.
+Notre objectif : vous offrir une solution **multicanale** qui facilite l'émission et la réception de paiements sur site internet, application mobile ou backend.
 
-À travers nos services, donnez satisfaction à vos clients en leur permettant:
+## Ce que vous pouvez faire avec Intram
 
-* De visiter votre boutique en ligne et d'acheter vos produits par un lien personnalisé.
-* D'automatiser vos paiements de masse ou récurrents et vous faire payer à des fréquences préférentielles.
-* Payez des milliers de personnes en 1 clic sur leurs comptes Mobile Money, Comptes Bancaires.
+* **Vendre en ligne** — proposez votre catalogue par un lien personnalisé ou intégrez un checkout sur votre site.
+* **Encaisser via Mobile Money et carte bancaire** — un seul intégration couvre MTN, Moov, SBIN et les cartes Visa/Mastercard.
+* **Automatiser vos paiements de masse** — payez en 1 clic des milliers de bénéficiaires sur leurs comptes Mobile Money ou bancaires.
+* **Programmer des paiements récurrents** — pour vos abonnements, salaires, loyers, redevances scolaires…
+* **Suivre votre activité** — dashboard avec transactions, statuts, balances, journaux, webhooks, refunds.
 
-Vous êtes notre priorité ! Il est important pour nous que nos clients se sentent toujours bien et que la qualité de nos relations soit toujours au top. C’est pour cela que nous restons continuellement à votre écoute et présents pour vous accompagner dans votre croissance. N'hésitez pas un seul instant, [Essayez INTRAM maintenant](https://app.intram.org/register).
+## Notre engagement
+
+Vous êtes notre priorité. Nous restons continuellement à votre écoute et présents pour vous accompagner dans votre croissance. La qualité de nos relations est au cœur de notre fonctionnement.
+
+[**Essayez INTRAM maintenant →**](https://app.intram.org/register)
+
+## Prochaines étapes pour intégrer
+
+| Vous voulez… | Direction |
+| :--- | :--- |
+| Créer un compte | [Inscription](../account/register.md) |
+| Comprendre les APIs disponibles | [Introduction](../README.md) |
+| Démarrer une intégration backend | [Merchant API — Quickstart](../merchant-api/quickstart.md) |
+| Intégrer un checkout client | [SDK / clients](../api-index.md) |

@@ -6,7 +6,7 @@ description: >-
 
 # Idempotency
 
-Toute requête mutante (POST / PUT / PATCH) vers le Merchant API doit porter un header `Idempotency-Key`. C'est ce qui te permet de **retenter** une requête sans risquer un double payout, un double transfert, un double refund — même si la première tentative a coupé en cours de route.
+Toute requête mutante (POST / PUT / PATCH) vers le Merchant API doit porter un header `Idempotency-Key`. C'est ce qui vous permet de **retenter** une requête sans risquer un double payout ou un double refund — même si la première tentative a coupé en cours de route.
 
 ## Format de la clé
 

@@ -37,7 +37,7 @@ Content-Type: application/json
 
 | Champ | Obligatoire | Règles |
 | :--- | :---: | :--- |
-| `transaction_reference` | ✓ | Public `_reference` ou Mongo `_id` |
+| `transaction_reference` | ✓ | Référence publique de la transaction |
 | `amount` | optionnel | Défaut = montant total. Doit être ≤ montant original. Refund partiel selon le support du provider |
 | `reason` | optionnel | Max 500 chars |
 | `metadata` | optionnel | Object libre |
@@ -50,6 +50,7 @@ Avant d'enregistrer l'opération, l'endpoint vérifie que la transaction existe 
 HTTP 404
 {
   "error": true,
+  "http_status": 404,
   "code": "transaction_not_found",
   "message": "Transaction not found for this merchant"
 }
@@ -60,11 +61,13 @@ HTTP 404
 ```json
 {
   "error": false,
+  "http_status": 202,
   "data": {
     "operation_id": "op_6f7c…",
     "type": "refund",
     "status": "queued",
-    "env": "live"
+    "env": "live",
+    "date": "2026-05-20T10:30:00.000Z"
   }
 }
 ```
@@ -75,10 +78,8 @@ HTTP 404
 {
   "status": "completed",
   "refund_reference": "9DEFGH1234",
-  "refund_id": "65a…",
   "amount": 12000,
   "transaction_reference": "AB12CD34EF",
-  "transaction_id": "67e9…",
   "provider_response": { "responsecode": "00", "responsemsg": "Success" }
 }
 ```

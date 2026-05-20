@@ -13,7 +13,7 @@ Intram propose **deux interfaces** complémentaires que vous pouvez utiliser sel
 | Interface | À utiliser pour | Documentation |
 | :--- | :--- | :--- |
 | **API publique de paiement** (legacy) | Construire un checkout client : pages widget, SDK JavaScript, plugins WordPress/Django/PHP | [HTTP](backend/http.md), [SDKs](api-index.md) |
-| **Merchant API v1** (nouveau, recommandée pour le backend) | Piloter votre compte marchand depuis votre backend : solde, payouts, transferts, demandes de paiement, refunds, webhooks signés | [Merchant API](merchant-api/README.md) |
+| **Merchant API v1** (nouveau, recommandée pour le backend) | Piloter votre compte marchand depuis votre backend : solde, payouts, demandes de paiement, refunds, webhooks signés | [Merchant API](merchant-api/README.md) |
 
 Les deux coexistent sans interférer. Choisissez la première si vous voulez encaisser un paiement client ; la seconde si vous voulez automatiser la gestion de votre compte depuis vos propres serveurs.
 
@@ -48,8 +48,10 @@ Ne partagez jamais vos clés `private_key` et `secret_key` — pas dans un dép�
 | Vous voulez… | Direction |
 | :--- | :--- |
 | Créer un compte | [Inscription](account/register.md) → [Activation](account/account-activation.md) |
+| Encaisser sans site web avec un lien à partager | [Intram Direct](modules/intram-direct.md) |
+| Gérer un catalogue d'offres + clients + abonnements | [Intram Business](modules/intram-business.md) |
 | Encaisser des paiements depuis votre site (page checkout) | [SDKs frontend / backend](api-index.md) ou [HTTP direct](backend/http.md) |
-| Piloter votre compte (payouts, balance, transferts) depuis votre backend | [Merchant API v1 — Quickstart](merchant-api/quickstart.md) |
+| Piloter votre compte (payouts, balance, refunds) depuis votre backend | [Merchant API v1 — Quickstart](merchant-api/quickstart.md) |
 | Encaisser des paiements depuis votre app mobile | [Flutter](mobile/flutter.md) |
 | Comprendre les frais appliqués | [Frais](payment/fees.md) |
 | Connaître les devises et moyens de paiement supportés | [Devises supportées](payment/supported-devices.md) |

@@ -29,7 +29,7 @@ Vos serveurs (production / staging / dev) qui appellent l'API Intram pour pilote
 
 **Balance / Solde**
 Montant disponible sur votre wallet. Exposé via [`GET /merchant/balance`](merchant-api/reference/balance.md). Composé de :
-- `available` — disponible pour payouts/transferts immédiats
+- `available` — disponible pour payouts immédiats
 - `pending` — en attente de settlement
 
 ## C
@@ -104,7 +104,7 @@ Numéro de téléphone international au format E.164 sans le `+`. Exemple : `229
 ## O
 
 **Operation**
-Trace d'une opération asynchrone Merchant API (`payout`, `transfer`, `payment_request`, `refund`). Identifiée par un `operation_id` (`op_…`). Statuts : `queued`, `processing`, `succeeded`, `failed`. Voir [Opérations](merchant-api/reference/operations.md).
+Trace d'une opération asynchrone Merchant API (`payout`, `payment_request`, `refund`). Identifiée par un `operation_id` (`op_…`). Statuts : `queued`, `processing`, `succeeded`, `failed`. Voir [Opérations](merchant-api/reference/operations.md).
 
 ## P
 
@@ -132,7 +132,7 @@ Code-barres 2D encodant l'URL du gateway. Permet à un client de scanner et paye
 ## R
 
 **`reference`**
-Identifiant public d'une transaction ou d'un transfert, lisible par l'humain (ex : `AB12CD34EF`). Distinct du Mongo `_id`.
+Identifiant public d'une transaction ou d'un payout, lisible par l'humain (ex : `AB12CD34EF`).
 
 **Refund / Remboursement**
 Inverser une transaction (totalement ou partiellement). Voir [Refunds](merchant-api/reference/refunds.md).
@@ -166,10 +166,7 @@ Header `X-Signature: sha256=<hex>` calculé à partir de `(timestamp + method + 
 Header `X-Timestamp` en format [ISO 8601](#i) UTC. Rejeté si > 5 minutes d'écart avec l'heure serveur (anti-replay).
 
 **Transaction**
-Trace d'un paiement reçu par le marchand. Distincte d'un transfert (interne) et d'un payout (sortant).
-
-**Transfer / Transfert**
-Mouvement wallet-to-wallet à l'intérieur de l'écosystème Intram (M2C, C2C, M2M, C2M).
+Trace d'un paiement reçu par le marchand. Distincte d'un payout (sortant vers Mobile Money ou compte bancaire).
 
 **Trusted proxy**
 Quand l'application est derrière Nginx, on fait confiance au header `X-Real-IP` qu'il injecte pour résoudre la vraie IP appelante. Contrôlé par la variable d'environnement `MERCHANT_API_TRUSTED_PROXY`.

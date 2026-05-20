@@ -20,19 +20,25 @@ X-Signature: …
 ```json
 {
   "error": false,
+  "http_status": 200,
   "data": [
     {
-      "id": "65a…",
+      "subscription_id": "whs_b4c3a2…",
       "url": "https://my-app.example.com/intram/webhook",
       "event": "*",
-      "secret_hint": "…ab12cd",
-      "created_at": "2026-05-20T08:00:00.000Z"
+      "date": "2026-05-20T08:00:00.000Z"
     }
   ]
 }
 ```
 
-`secret_hint` est les 6 derniers caractères du secret — utile pour identifier visuellement quelle souscription a quel secret, sans révéler le secret en entier.
+| Champ | Type | Description |
+| :--- | :--- | :--- |
+| `http_status` | number | Écho du code HTTP de la réponse |
+| `subscription_id` | string | Identifiant public de la souscription (à passer à `DELETE /webhooks/:subscription_id` ou `POST /webhooks/:subscription_id/test`) |
+| `url` | string | URL HTTPS qui reçoit les livraisons |
+| `event` | string | Pattern d'événements écouté (`*`, `payout.*`, `payout.completed`, …) |
+| `date` | string (ISO 8601) | Date de création de la souscription |
 
 ---
 
@@ -66,13 +72,13 @@ Content-Type: application/json
 ```json
 {
   "error": false,
+  "http_status": 201,
   "data": {
-    "id": "65a…",
+    "subscription_id": "whs_b4c3a2…",
     "url": "https://my-app.example.com/intram/webhook",
     "event": "payout.*",
     "secret": "whsec_b4c3a2…",
-    "secret_hint": "…ab12cd",
-    "created_at": "2026-05-20T10:30:00.000Z"
+    "date": "2026-05-20T10:30:00.000Z"
   },
   "message": "Webhook created. Store the secret now — it will not be shown again."
 }
@@ -84,12 +90,12 @@ Le `secret` n'est retourné qu'à la création. Stocke-le immédiatement dans un
 
 ---
 
-## `DELETE /webhooks/:id`
+## `DELETE /webhooks/:subscription_id`
 
 Supprime une souscription. Les livraisons en cours ne sont pas annulées (elles iront jusqu'à `exhausted` si elles échouent), mais aucune nouvelle livraison ne sera créée pour cette URL.
 
 ```http
-DELETE /v1/webhooks/65a…
+DELETE /v1/webhooks/whs_b4c3a2…
 X-Api-Key: …
 X-Timestamp: …
 X-Signature: …
@@ -98,18 +104,19 @@ X-Signature: …
 ```json
 {
   "error": false,
+  "http_status": 200,
   "message": "Webhook deleted"
 }
 ```
 
 ---
 
-## `POST /webhooks/:id/test`
+## `POST /webhooks/:subscription_id/test`
 
 Enqueue une livraison de test (`event: test.ping`) vers l'URL configurée. Utile pour vérifier que ton handler est joignable et que ta vérification de signature fonctionne sans déclencher de vraie opération.
 
 ```http
-POST /v1/webhooks/65a…/test
+POST /v1/webhooks/whs_b4c3a2…/test
 X-Api-Key: …
 Idempotency-Key: webhook-test-1
 Content-Type: application/json
@@ -123,6 +130,7 @@ Réponse :
 HTTP 202
 {
   "error": false,
+  "http_status": 202,
   "message": "Test delivery enqueued"
 }
 ```

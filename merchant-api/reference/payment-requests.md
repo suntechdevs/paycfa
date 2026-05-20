@@ -78,11 +78,13 @@ Content-Type: application/json
 ```json
 {
   "error": false,
+  "http_status": 202,
   "data": {
     "operation_id": "op_4d2a…",
     "type": "payment_request",
     "status": "queued",
-    "env": "live"
+    "env": "live",
+    "date": "2026-05-20T10:30:00.000Z"
   }
 }
 ```
@@ -92,13 +94,12 @@ Content-Type: application/json
 ```json
 {
   "transaction_reference": "AB12CD34EF",
-  "transaction_id": "67e9…",
   "status": "pending",
   "amount": 12000,
   "currency": "XOF",
-  "gateway_url":  "https://gateway.intram.org/67e9…",
-  "payment_url":  "https://gateway.intram.org/67e9…",
-  "receipt_url":  "https://gateway.intram.org/67e9…",
+  "gateway_url":  "https://gateway.intram.org/AB12CD34EF",
+  "payment_url":  "https://gateway.intram.org/AB12CD34EF",
+  "receipt_url":  "https://gateway.intram.org/AB12CD34EF",
   "qr_code": "data:image/png;base64,iVBOR…"
 }
 ```

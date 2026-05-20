@@ -45,7 +45,6 @@ Selon le type de paiement, des frais supplémentaires peuvent s'appliquer :
 | :--- | :--- |
 | Paiement initié via un **Payment Link** Intram Direct | Surcharge plateforme déduite du net versé au marchand |
 | Marchand de catégorie **club** | Surcharge catégorielle déduite du net versé au marchand |
-| Transfert wallet-to-wallet (M2C, C2C) | Pourcentage du montant transféré (taux plateforme) |
 | Refund mobile money | Frais provider éventuels débités du wallet marchand |
 
 Ces add-ons sont définis au niveau plateforme ; consultez le support ou votre dashboard pour les valeurs à jour.

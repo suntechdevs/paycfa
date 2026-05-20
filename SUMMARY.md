@@ -16,6 +16,13 @@
 * [Devises supportées](payment/supported-devices.md)
 * [Frais](payment/fees.md)
 
+## MODULES
+
+* [Intram Direct](modules/intram-direct.md)
+* [Intram Business](modules/intram-business.md)
+* [Intram Scholar](modules/intram-scholar.md)
+* [Intram Immo](modules/intram-immo.md)
+
 ## MERCHANT API V1
 
 * [Overview](merchant-api/README.md)
@@ -27,11 +34,9 @@
 * [Recevoir les webhooks signés](merchant-api/webhooks.md)
 * [Solde du wallet](merchant-api/reference/balance.md)
 * [Payouts (reversements)](merchant-api/reference/payouts.md)
-* [Transferts wallet-to-wallet](merchant-api/reference/transfers.md)
 * [Demandes de paiement](merchant-api/reference/payment-requests.md)
 * [Refunds](merchant-api/reference/refunds.md)
 * [Statut transactions](merchant-api/reference/transactions.md)
-* [Statut transferts](merchant-api/reference/transfers-status.md)
 * [Opérations asynchrones](merchant-api/reference/operations.md)
 * [Souscriptions webhook](merchant-api/reference/webhook-subscriptions.md)
 * [Changelog](merchant-api/changelog.md)

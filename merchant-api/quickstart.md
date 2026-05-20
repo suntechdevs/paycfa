@@ -67,14 +67,12 @@ Réponse attendue :
 HTTP/2 200
 {
   "error": false,
+  "http_status": 200,
   "data": {
-    "merchant_id": "65a...",
-    "env": "sandbox",
-    "currency": { "code": "XOF", "symbol": "FCFA" },
-    "available": 10000,
-    "pending": 0,
-    "payment_method_balances": [],
-    "as_of": "2026-05-20T10:30:00.123Z"
+    "currency": "XOF",
+    "payment_method_balances": [
+      { "payment_method": "MTN Bénin", "available": 10000, "pending": 0 }
+    ]
   }
 }
 ```
@@ -118,11 +116,13 @@ Réponse :
 HTTP/2 202
 {
   "error": false,
+  "http_status": 202,
   "data": {
     "operation_id": "op_2f4a...",
     "type": "payout",
     "status": "queued",
     "env": "sandbox",
+    "date": "2026-05-20T10:30:00.000Z",
     "_links": { "self": "/api/v1/merchant/operations/op_2f4a..." }
   }
 }

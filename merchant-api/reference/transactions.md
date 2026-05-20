@@ -20,53 +20,64 @@ X-Signature: …
 `:reference` accepte :
 
 * Le `_reference` public (10 chars alphanumériques)
-* Le Mongo `_id` (24 hex)
+* L'identifiant interne Mongo (24 hex)
 
 ### Réponse `200 OK`
 
 ```json
 {
   "error": false,
+  "http_status": 200,
   "data": {
     "reference": "AB12CD34EF",
-    "service_reference": "MTN987654321",
-    "id": "67e9…",
     "status": "SUCCESS",
     "type": "CREDIT",
-    "env": "live",
     "amount": 12000,
     "fees": 240,
     "net_amount": 11760,
     "currency": "XOF",
-    "payment_method": {
-      "code": "MTN_BENIN_229",
-      "type": "Mobile",
-      "name": "MTN Bénin"
-    },
+    "payment_method": "MTN Bénin",
     "customer": {
-      "id": "65a…",
       "email": "client@example.com",
-      "first_name": "Ada",
-      "last_name": "Lovelace"
+      "name": "Ada Lovelace"
     },
-    "source_msisdn": "22961234567",
-    "qr_code": "data:image/png;base64,…",
-    "declined_reason": null,
-    "refunded_at": null,
-    "webhook_data": { "order_id": "4521" },
-    "created_at": "2026-05-20T10:30:00.000Z",
+    "source": {
+      "number": "22961234567"
+    },
+    "date": "2026-05-20T10:30:00.000Z",
     "refunds": [
       {
         "reference": "9DEFGH1234",
-        "service_reference": "MTN98...REFUND",
         "status": "SUCCESS",
         "reason": "Demande client",
-        "created_at": "2026-05-20T11:45:00.000Z"
+        "date": "2026-05-20T11:45:00.000Z"
       }
     ]
   }
 }
 ```
+
+### Champs
+
+| Champ | Type | Description |
+| :--- | :--- | :--- |
+| `http_status` | number | Écho du code HTTP de la réponse |
+| `reference` | string | Référence publique de la transaction |
+| `status` | string | Statut courant (voir tableau ci-dessous) |
+| `type` | string | `CREDIT`, `DEBIT` ou `REFUND` |
+| `amount` | number | Montant brut |
+| `fees` | number | Frais appliqués |
+| `net_amount` | number | Montant net après frais |
+| `currency` | string \| null | Code alphabétique de la devise (`XOF`, `EUR`, …) |
+| `payment_method` | string \| null | Nom du moyen de paiement (`MTN Bénin`, `Moov Bénin`, `Carte Visa`, …) |
+| `customer` | object | Coordonnées du client (`email`, `name`) — objet vide si non renseigné |
+| `source.number` | string \| null | Numéro source de l'opération (mobile money), s'il est connu |
+| `date` | string (ISO 8601) | Date de création de la transaction |
+| `refunds[]` | array | Liste des remboursements liés (vide si aucun) |
+| `refunds[].reference` | string | Référence publique du remboursement |
+| `refunds[].status` | string | Statut du remboursement |
+| `refunds[].reason` | string \| null | Motif du remboursement |
+| `refunds[].date` | string (ISO 8601) | Date du remboursement |
 
 ### Statuts possibles
 
@@ -103,6 +114,7 @@ Liste paginée des transactions du marchand, triée par création décroissante.
 ```json
 {
   "error": false,
+  "http_status": 200,
   "data": [ /* tableau de transactions, format identique au get unitaire */ ],
   "paging": {
     "limit": 20,
@@ -111,7 +123,7 @@ Liste paginée des transactions du marchand, triée par création décroissante.
 }
 ```
 
-`next_before` est `null` quand il n'y a plus de page suivante. Sinon, passe-le tel quel en `before` au prochain appel.
+`next_before` est `null` quand il n'y a plus de page suivante. Sinon, passez-le tel quel en `before` au prochain appel.
 
 ### Pagination type
 

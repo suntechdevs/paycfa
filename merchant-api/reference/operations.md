@@ -4,7 +4,7 @@ description: Suivre l'avancement et le résultat d'une opération asynchrone.
 
 # Opérations
 
-Toutes les mutations asynchrones (`/payouts`, `/transfers`, `/payment-requests`, `/refunds`) renvoient un `operation_id` que tu peux suivre via ces endpoints.
+Toutes les mutations asynchrones (`/payouts`, `/payment-requests`, `/refunds`) renvoient un `operation_id` que vous pouvez suivre via ces endpoints.
 
 {% hint style="info" %}
 **Préfère les webhooks** au polling. Le polling est fait pour le fallback (en dev local, en debug, ou quand ton endpoint webhook est temporairement indisponible).
@@ -26,6 +26,7 @@ X-Signature: …
 ```json
 {
   "error": false,
+  "http_status": 200,
   "data": {
     "operation_id": "op_2f4a8b1c...",
     "type": "payout",
@@ -40,9 +41,9 @@ X-Signature: …
     },
     "error": null,
     "attempts": 1,
-    "created_at": "2026-05-20T10:30:00.000Z",
-    "updated_at": "2026-05-20T10:30:14.000Z",
-    "completed_at": "2026-05-20T10:30:14.000Z",
+    "date": "2026-05-20T10:30:00.000Z",
+    "updated_date": "2026-05-20T10:30:14.000Z",
+    "completed_date": "2026-05-20T10:30:14.000Z",
     "_links": { "self": "/api/v1/merchant/operations/op_2f4a8b1c..." }
   }
 }
@@ -85,7 +86,7 @@ Liste paginée des opérations du marchand.
 | Param | Description |
 | :--- | :--- |
 | `limit` | 1-100, défaut 20 |
-| `type` | `balance`, `payout`, `transfer`, `payment_request`, `refund` |
+| `type` | `payout`, `payment_request`, `refund` |
 | `status` | `queued`, `processing`, `succeeded`, `failed`, `expired` |
 | `before` | ISO 8601 — curseur de pagination |
 
@@ -93,7 +94,7 @@ Liste paginée des opérations du marchand.
 
 ```bash
 # Le filtrage par date passe par `before` (curseur). Pour une fenêtre,
-# itère depuis maintenant et coupe quand created_at < now - 7j.
+# itère depuis maintenant et coupe quand date < now - 7j.
 GET /v1/operations?type=payout&status=failed&limit=100
 ```
 
@@ -102,6 +103,7 @@ GET /v1/operations?type=payout&status=failed&limit=100
 ```json
 {
   "error": false,
+  "http_status": 200,
   "data": [ /* tableau d'opérations */ ],
   "paging": { "limit": 20, "next_before": "2026-05-19T12:34:56.000Z" }
 }

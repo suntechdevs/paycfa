@@ -85,13 +85,14 @@ Content-Type: application/json
 ```json
 {
   "error": false,
+  "http_status": 202,
   "data": {
     "operation_id": "op_2f4a8b1c…",
     "type": "payout",
     "status": "queued",
     "env": "live",
-    "payload": { /* le body que tu as envoyé */ },
-    "created_at": "2026-05-20T10:30:00.000Z",
+    "payload": { /* le body que vous avez envoyé */ },
+    "date": "2026-05-20T10:30:00.000Z",
     "_links": { "self": "/api/v1/merchant/operations/op_2f4a8b1c…" }
   }
 }
@@ -107,7 +108,6 @@ Quand l'opération est terminée, `op.result` ressemble à :
   "amount": 25000,
   "currency": "XOF",
   "destination": { "type": "mobile_money", "msisdn": "22961234567" },
-  "reversement_id": "65a…",
   "status": "completed",
   "provider_response": {
     "responsecode": "00",

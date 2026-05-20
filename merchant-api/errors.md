@@ -24,11 +24,13 @@ HTTP 200
 HTTP 202 Accepted
 {
   "error": false,
+  "http_status": 202,
   "data": {
     "operation_id": "op_2f4a…",
     "type": "payout",
     "status": "queued",
     "env": "live",
+    "date": "2026-05-20T10:30:00.000Z",
     "_links": { "self": "/api/v1/merchant/operations/op_2f4a…" }
   }
 }
@@ -42,6 +44,7 @@ L'opération est en file d'attente. Suis son avancement via webhook (recommandé
 HTTP 4xx | 5xx
 {
   "error": true,
+  "http_status": 400,
   "code":  "validation_error",
   "message": "Invalid payout request",
   "details": [ /* optionnel — détails par champ */ ]
@@ -51,6 +54,7 @@ HTTP 4xx | 5xx
 | Champ | Description |
 | :--- | :--- |
 | `error` | Toujours `true` en cas d'erreur, `false` en cas de succès |
+| `http_status` | Écho du code HTTP de la réponse |
 | `code` | Identifiant machine-readable stable de l'erreur (à utiliser dans le code) |
 | `message` | Message human-readable, peut évoluer entre versions |
 | `details` | Optionnel — tableau de violations de validation par champ, ou objet provider-spécifique |
@@ -95,7 +99,6 @@ Toujours **dispatcher sur `code`**, jamais sur `message`. Le message peut être 
 | Code | HTTP | Action |
 | :--- | :---: | :--- |
 | `transaction_not_found` | 404 | Le `transaction_reference` n'existe pas ou n'appartient pas à ce marchand |
-| `transfer_not_found` | 404 | Idem pour les transferts |
 | `operation_not_found` | 404 | L'`operation_id` n'existe pas ou n'appartient pas à ce marchand |
 | `not_refundable` | 400 | La transaction n'est pas dans un statut remboursable (déjà refunded, échouée, etc.) |
 
@@ -105,9 +108,8 @@ Quand le worker traite une opération asynchrone et qu'elle échoue, la réponse
 
 | Code | Quand |
 | :--- | :--- |
-| `insufficient_balance` | Solde marchand insuffisant pour le payout / transfert |
+| `insufficient_balance` | Solde marchand insuffisant pour le payout |
 | `merchant_wallet_missing` | Aucun wallet provisionné pour ce marchand (cas rare) |
-| `recipient_not_found` | Destinataire d'un transfert M2C inconnu |
 | `provider_rejected` | Le provider MoMo / banque a refusé l'opération |
 | `provider_unavailable` | Aucun handler pour le couple country/operator demandé |
 | `provider_error` | Erreur réseau ou exception inattendue du provider |

@@ -6,7 +6,7 @@ description: >-
 
 # Recevoir les webhooks signés
 
-Quand une opération asynchrone du Merchant API change d'état (payout terminé, transfert échoué, paiement reçu…), Intram fait un `POST` HTTP signé vers l'URL que tu as configurée. C'est le moyen recommandé de suivre l'état des opérations — bien plus efficace que du polling.
+Quand une opération asynchrone du Merchant API change d'état (payout terminé, paiement reçu, remboursement settled…), Intram fait un `POST` HTTP signé vers l'URL que vous avez configurée. C'est le moyen recommandé de suivre l'état des opérations — bien plus efficace que du polling.
 
 ## Configurer un endpoint webhook
 
@@ -150,8 +150,6 @@ app.post('/intram/webhook',
 | `payout.completed` | Le payout mobile money a été confirmé par le provider |
 | `payout.queued` | Le payout bancaire a été accepté pour traitement back-office |
 | `payout.failed` | Le payout a été rejeté (solde, provider, validation) |
-| `transfer.completed` | Le transfert M2C wallet-to-wallet est settled |
-| `transfer.failed` | Le transfert a échoué |
 | `payment_request.created` | La demande de paiement est prête, `gateway_url` disponible |
 | `payment_request.paid` | Le client a payé avec succès |
 | `payment_request.pending` | Le client a initié mais le provider n'a pas confirmé |
@@ -159,7 +157,7 @@ app.post('/intram/webhook',
 | `refund.completed` | Le refund a été settled (mobile money succeeded ou Stripe refund created) |
 | `refund.pending` | Le refund est accepté par le provider mais pas encore settled |
 | `refund.failed` | Le refund a été rejeté |
-| `test.ping` | Envoi de test via `POST /webhooks/:id/test` |
+| `test.ping` | Envoi de test via `POST /webhooks/:subscription_id/test` |
 
 ## Bonnes pratiques
 
